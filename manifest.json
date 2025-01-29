@@ -1,0 +1,27 @@
+{
+    "name": "Yams",
+    "short_name": "Yams",
+    "icons": [
+        {
+            "src": "./public/assets/img/yamsIcon32x32.png",
+            "sizes": "32x32",
+            "type": "image/png"
+        },
+        {
+            "src": "./public/assets/img/yamsIcon192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "./public/assets/img/yamsIcon512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "start_url": "https://adrienbregon.alwaysdata.net/index.html",
+    "orientation": "portrait",
+    "display": "standalone",
+    "theme_color": "#003D18",
+    "background_color": "#003D18",
+    "scope": "/"
+}

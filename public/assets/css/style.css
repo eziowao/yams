@@ -1,0 +1,197 @@
+/* ########################### CHARTE GRAPHIQUE ########################### */
+body {
+    background-image: url(../img/wood.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-width: 100vw;
+    min-height: 100vh;
+}
+
+#board {
+    background-image: url(../img/board.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    min-height: 400px;
+}
+
+@media screen and (max-width: 375px) {
+    #board {
+        min-height: 300px;
+    }
+}
+
+#logoTitle {
+    max-height: 100px;
+}
+
+.irish-grover-regular {
+    font-family: "Irish Grover", system-ui;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.bg-greeny {
+    background-color: #003D18;
+}
+
+.bg-greeny-light {
+    background-color: #2D8652;
+}
+
+.btn-close {
+    --bs-btn-close-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z'/%3e%3c/svg%3e")
+}
+
+
+/* ########################### BOARD ZONE ########################### */
+.diceDiv {
+    max-width: 80px;
+}
+
+
+/* ########################### MODAL ZONE ########################### */
+.img-modal {
+    width: 15%;
+}
+
+#finalScoreDiv {
+    width: min-content;
+}
+
+.img-table {
+    height: 15px;
+}
+
+.rotatingImage {
+    position: absolute;
+    width: 25px;
+    /* Ajustez la taille de l'image selon vos besoins */
+    height: 25px;
+    top: calc(50% - 15px);
+    /* Ajustez la position verticale de l'image */
+    left: calc(50% - 10px);
+    /* Ajustez la position horizontale de l'image */
+    animation: rotateImage 4s linear infinite;
+}
+
+@keyframes rotateImage {
+    from {
+        transform: rotate(0deg) translateX(60px) rotate(0deg);
+        /* Ajustez la position de départ */
+    }
+
+    to {
+        transform: rotate(360deg) translateX(60px) rotate(0deg);
+        /* Ajustez la position finale */
+    }
+}
+
+/* footer  */
+
+.share-menu {
+    display: flex;
+    box-shadow: 0 0 8px white;
+    border-radius: 100px;
+    padding-left: 50px;
+    position: relative;
+    transition: 100ms linear;
+    transform-origin: right center;
+    overflow: hidden;
+    width: 50px;
+    background-color: white;
+}
+
+.share-menu i {
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: #EAA26E;
+    z-index: 1000;
+}
+
+.btn-share {
+    position: absolute;
+    left: 0;
+    border-radius: 50%;
+}
+
+.share-menu.active {
+    width: 300px
+}
+
+#copy-success {
+    position: fixed;
+    top: 91%;
+    padding: 8px 16px;
+    background-color: #EAA26E;
+    color: white;
+    border-radius: 5px;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+#copy-success.show {
+    opacity: 1;
+    top: 1%;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+.modal-qrcode {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(68, 59, 56, 0.9);
+}
+
+#modal-qr-code {
+    background: none;
+    margin: 15% auto;
+    width: fit-content;
+}
+
+#qrImage {
+    height: 200px;
+}
+
+.close {
+    display: none;
+}
+
+/* ########################### RULE ZONE ########################### */
+
+.accordion-button:not(.collapsed) {
+    color: white;
+    background-color: #256b42;
+}
+
+.accordion {
+    --bs-accordion-btn-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='M2 5L8 11L14 5'/%3e%3c/svg%3e");
+    --bs-accordion-btn-active-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='M2 5L8 11L14 5'/%3e%3c/svg%3e");
+    --bs-accordion-btn-focus-box-shadow: 0 0 0 0.25rem rgb(255 255 255 / 25%);
+    --bs-accordion-border-color: none;
+}
+
+.prevent-hover.btn:hover,
+.prevent-hover.btn:focus,
+.prevent-hover.btn:active {
+    color: #fff;
+    background-color: #003D18;
+}
+
+.no-hover:hover {
+    background-color: #003D18;
+}
