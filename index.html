@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Le célèbre jeu de dés, porté sur pc et mobile">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Irish+Grover&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="./public/assets/css/style.css">
+    <link rel="shortcut icon" href="./public/assets/img/yamsIcon512x512.png" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/735b33aaa3.js" crossorigin="anonymous"></script>
+    <link rel="manifest" href="/manifest.json">
+    <title>Yams</title>
+</head>
+
+<body class="irish-grover-regular position-relative">
+    <!-- ########################################################### START HEADER ########################################################### -->
+    <header class="container">
+        <div class="row">
+            <!-- START OFFCANVAS BUTTONS -->
+            <div class="col-12 d-flex justify-content-between pt-3">
+                <button type="button" class="btn shadow-lg btn-light bg-greeny-light text-white"
+                    data-bs-toggle="offcanvas" data-bs-target="#offcanvasLeft"
+                    aria-controls="offcanvasLeft">RÈGLES</button>
+                <button class="btn btn btn-light bg-greeny-light text-white" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">SCORE</button>
+            </div>
+            <!-- END OFFCANVAS BUTTONS -->
+        </div>
+    </header>
+    <!-- ########################################################### END HEADER ########################################################### -->
+
+    <!-- ########################################################### START MAIN ########################################################### -->
+    <main class="container">
+        <div class="row justify-content-center">
+            <!-- START LOGO -->
+            <div class="col-10 d-flex justify-content-center mt-3">
+                <img id="logoTitle" class="img-fluid" src="./public/assets/img/logoTitleText.svg" alt="">
+            </div>
+            <!-- END LOGO -->
+
+            <!-- START BOARD GAME -->
+            <div id="board" class="col-10 d-flex flex-column justify-content-center">
+                <div class="row justify-content-center pb-4">
+                    <div class="col-3 col-sm-4 diceDiv" id="diceDiv1"></div>
+                    <div class="col-3 col-sm-4 diceDiv" id="diceDiv2"></div>
+                </div>
+                <div class="row justify-content-center pb-2">
+                    <div class="col-3 col-sm-4 diceDiv" id="diceDiv3"></div>
+                    <div class="col-3 col-sm-4 diceDiv mt-4" id="diceDiv4"></div>
+                    <div class="col-3 col-sm-4 diceDiv" id="diceDiv5"></div>
+                </div>
+            </div>
+            <!-- END BOARD GAME -->
+
+            <!-- START BUTTONS -->
+            <div class="col-12 d-flex flex-column align-items-center position-relative">
+                <button type="button"
+                    class="btn border-0 shadow-lg btn-light mb-2 bg-greeny text-white fs-2 position-relative no-hover prevent-hover"
+                    id="start">LANCER</button>
+                <img src="./public/assets/img/rotate.gif" class="rotatingImage position-absolute" alt="Image tournante">
+                <button type="button"
+                    class="btn border-0 shadow-lg btn-light mt-2 bg-greeny text-white fs-2 no-hover prevent-hover"
+                    id="save" data-bs-toggle="modal" data-bs-target="#exampleModal">GARDER</button>
+            </div>
+            <!-- END BUTTONS -->
+
+            <!-- START FINAL DIV -->
+            <div id="finalScoreDiv"
+                class="bg-greeny-light px-5 pt-3 rounded-5 mt-5 d-flex flex-column justify-content-center align-items-center">
+                <p class="text-center text-white fs-1 text-decoration-underline text-nowrap">FIN DE PARTIE</p>
+                <p id="finalScore" class="text-center text-white fs-2 w-100"></p>
+                <button type="button" class="btn border-0 shadow-lg btn-light mb-2 bg-danger text-white fs-6"
+                    id="newGame">NOUVELLE PARTIE</button>
+            </div>
+            <!-- END FINAL DIV -->
+
+            <!-- START MODAL -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content bg-greeny-light text-white">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Garder vos dés actuel ?</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body d-flex justify-content-around">
+
+                        </div>
+                        <div class="modal-footer">
+                            <form action="./index.html" class="w-100 ">
+                                <div class="d-flex flex-column justify-content-around align-items-center">
+                                    <label for="operationsList">Opération :</label>
+                                    <select class="text-center" name="operationsList" id="operationsList">
+                                        <option value="none" disabled selected>-- Opérations --</option>
+                                    </select>
+                                </div>
+                                <div class="d-flex justify-content-around mt-3">
+                                    <button type="button" class="btn btn-primary" id="saveScore">Enregistrer</button>
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+                                        id="closeModal">Fermer</button>
+                                </div>
+                            </form>
+                            <p id="scoreResum" class="fw-bold text-center w-100 mt-3 fs-3"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END MODAL -->
+
+            <!-- START OFFCANVAS SCORE TABLE -->
+            <div class="offcanvas offcanvas-end bg-greeny-light text-white" tabindex="-1" id="offcanvasRight"
+                aria-labelledby="offcanvasRightLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasRightLabel">Feuille de Score</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body d-flex justify-content-center">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th class="text-center px-5">J1</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- END OFFCANVAS SCORE TABLE -->
+
+            <!-- START OFFCANVAS RÈGLES -->
+            <div class="offcanvas offcanvas-start bg-greeny-light text-white" tabindex="-1" id="offcanvasLeft"
+                aria-labelledby="offcanvasLeftLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasLeftLabel">Règles du jeu</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <div class="accordion accordion-flush" id="accordionFlushExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button bg-greeny-light collapsed text-light" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false"
+                                    aria-controls="flush-collapseOne">
+                                    Objectif
+                                </button>
+                            </h2>
+                            <div id="flush-collapseOne" class="accordion-collapse collapse"
+                                data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body bg-greeny-light text-light">
+                                    Le but du jeu est d'obtenir le score le plus élevé en remplissant différentes
+                                    combinaisons sur votre carnet de score.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button bg-greeny-light collapsed text-light" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false"
+                                    aria-controls="flush-collapseTwo">
+                                    Scores
+                                </button>
+                            </h2>
+                            <div id="flush-collapseTwo" class="accordion-collapse collapse"
+                                data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body bg-greeny-light text-light">
+                                    Un tour contient un maximum de 3 lancer de dés. Pour passer au tour suivant, le
+                                    joueur doit choisir une combinaison à inscrire sur son carnet de score. Le score est
+                                    calculé en fonction de la combinaison choisie et des dés obtenus.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button bg-greeny-light collapsed text-light" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#flush-collapseThree"
+                                    aria-expanded="false" aria-controls="flush-collapseThree">
+                                    Joker
+                                </button>
+                            </h2>
+                            <div id="flush-collapseThree" class="accordion-collapse collapse"
+                                data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body bg-greeny-light text-light">
+                                    Si vous ne pouvez pas remplir une combinaison, vous pouvez inscrire un score zéro
+                                    dans une catégorie de votre choix.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button bg-greeny-light collapsed text-light" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#flush-collapseFourth"
+                                    aria-expanded="false" aria-controls="flush-collapseFourth">
+                                    Fin du jeu
+                                </button>
+                            </h2>
+                            <div id="flush-collapseFourth" class="accordion-collapse collapse"
+                                data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body bg-greeny-light text-light">
+                                    Le jeu se termine lorsque le joueurs a rempli toutes les catégories de son carnet de
+                                    score.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button bg-greeny-light collapsed text-light" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#flush-collapseFifth"
+                                    aria-expanded="false" aria-controls="flush-collapseFifth">
+                                    Les combinaisons
+                                </button>
+                            </h2>
+                            <div id="flush-collapseFifth" class="accordion-collapse collapse"
+                                data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body bg-greeny-light text-light">
+                                    <ul>
+                                        <li>
+                                            Brelan : 3 dés identiques.
+                                        </li>
+                                        <li>
+                                            Carré : 4 dés identiques.
+                                        </li>
+                                        <li>
+                                            Full : Brelan + 2 dés identiques. (25 points)
+                                        </li>
+                                        <li>
+                                            La petite suite : 1 - 2 - 3 - 4 - 5. (30 points)
+                                        </li>
+                                        <li>
+                                            La grande suite : 2 - 3 - 4 - 5 - 6. (40 points)
+                                        </li>
+                                        <li>
+                                            Yams : 5 dés identiques. (50 points)
+                                        </li>
+                                        <li>
+                                            Chance : Somme des valeurs des 5 dés.
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- FIN OFFCANVAS RÈGLES -->
+
+            <div class="d-flex w-100 flex-row-reverse">
+                <div class="share-menu">
+                    <a id="twitter-share" href="#" target="_blank"><i class="fa-brands fa-twitter fs-2"></i></a>
+                    <a id="facebook-share" href="#" target="_blank"><i class="fa-brands fa-facebook fs-2"></i></a>
+                    <a id="telegram-share" href="#" target="_blank"><i class="fa-brands fa-telegram fs-2"></i></a>
+                    <a id="qr-code" href="#" target="_blank"><i class="fa-solid fa-qrcode"></i></a>
+                    <a id="copy-link"><i class="fa-solid fa-copy fs-2"></i></a>
+                    <i class="btn-share fa-solid fa-share fs-2 text-dark"></i>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-center">
+                <div class="modal-qrcode" id="qrModal">
+                    <div id="modal-qr-code" class="modal-content ">
+                        <span class="close">&times;</span>
+                        <img id="qrImage" src="" alt="QR Code">
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-center">
+                <div id="copy-success" class="d-flex justify-content-center">Lien copié !</div>
+            </div>
+        </div>
+    </main>
+    <!-- ########################################################### END MAIN ########################################################### -->
+
+    <!-- ########################################################### START FOOTER ########################################################### -->
+    <footer>
+    </footer>
+    <!-- ########################################################### END FOOTER ########################################################### -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script src="./public/assets/js/script.js"></script>
+</body>
+
+</html>
